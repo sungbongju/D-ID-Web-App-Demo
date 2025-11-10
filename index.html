@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #f5f7fa;
+            background: #1a1a2e;
             color: #333;
             line-height: 1.6;
         }
@@ -64,62 +64,47 @@
 
         /* PPT 프레젠테이션 섹션 */
         .presentation-section {
-            max-width: 1400px;
+            max-width: 100%;
             margin: 60px auto;
-            padding: 0 20px;
+            padding: 40px 20px;
+            background: #1a1a2e;
         }
 
-        .presentation-container {
-            display: flex;
-            gap: 30px;
+        .presentation-title {
+            text-align: center;
+            color: white;
+            font-size: 2em;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .ppt-container {
+            max-width: 1400px;
+            margin: 0 auto;
             background: white;
             border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
 
         .ppt-slide {
-            flex: 1;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
-            padding: 50px;
-            color: white;
-            min-height: 600px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .ppt-slide h2 {
-            font-size: 2.5em;
-            margin-bottom: 40px;
-            text-align: center;
-            color: white;
-        }
-
-        .ppt-content {
-            font-size: 1.3em;
-            line-height: 2;
-        }
-
-        .ppt-content li {
-            margin-bottom: 20px;
-            list-style: none;
-        }
-
-        .ppt-content li:before {
-            content: "✓ ";
-            font-weight: bold;
-            margin-right: 10px;
+            width: 100%;
+            height: 700px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 10px;
+            position: relative;
         }
 
         .slide-controls {
             text-align: center;
             margin-top: 30px;
+            padding: 20px;
         }
 
         .slide-btn {
-            background: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             padding: 15px 40px;
@@ -128,17 +113,44 @@
             font-size: 1.1em;
             cursor: pointer;
             transition: all 0.3s;
+            font-weight: 600;
         }
 
         .slide-btn:hover {
-            background: #5568d3;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .slide-btn:active {
+            transform: translateY(0);
         }
 
         .slide-indicator {
             margin-top: 20px;
-            font-size: 1.1em;
-            color: #666;
+            font-size: 1.2em;
+            color: white;
+            font-weight: 600;
+        }
+
+        .slide-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: #667eea;
+            transform: scale(1.3);
         }
 
         #did-agent {
@@ -153,7 +165,7 @@
             color: white;
             text-align: center;
             padding: 30px 20px;
-            margin-top: 60px;
+            margin-top: 0;
         }
 
         footer p {
@@ -161,17 +173,20 @@
         }
 
         @media (max-width: 1200px) {
-            .presentation-container {
-                flex-direction: column;
+            .ppt-slide {
+                height: 500px;
             }
         }
 
         @media (max-width: 768px) {
             header h1 { font-size: 1.8em; }
             .container { padding: 30px 15px; }
-            .ppt-slide { padding: 30px; min-height: 400px; }
-            .ppt-slide h2 { font-size: 1.8em; }
-            .ppt-content { font-size: 1.1em; }
+            .ppt-slide { height: 300px; }
+            .presentation-title { font-size: 1.5em; }
+            .slide-btn { 
+                padding: 12px 25px;
+                font-size: 1em;
+            }
         }
     </style>
 </head>
@@ -217,18 +232,19 @@
 
     <!-- PPT 프레젠테이션 섹션 -->
     <div class="presentation-section">
-        <div class="presentation-container">
-            <div class="ppt-slide" id="pptSlide">
-                <!-- 슬라이드 내용이 여기 표시됩니다 -->
-            </div>
+        <h2 class="presentation-title">📊 AI 아바타가 설명하는 노인 운동 프로그램</h2>
+        
+        <div class="ppt-container">
+            <div class="ppt-slide" id="pptSlide"></div>
         </div>
         
         <div class="slide-controls">
             <button class="slide-btn" onclick="prevSlide()">◀ 이전</button>
             <button class="slide-btn" onclick="nextSlide()">다음 ▶</button>
             <div class="slide-indicator">
-                <span id="currentSlide">1</span> / <span id="totalSlides">5</span>
+                <span id="currentSlide">1</span> / <span id="totalSlides">14</span>
             </div>
+            <div class="slide-dots" id="slideDots"></div>
         </div>
     </div>
 
@@ -250,78 +266,54 @@
     </script>
 
     <script>
-        // PPT 슬라이드 데이터
+        // PPT 슬라이드 이미지 URL (업로드된 이미지들)
         const slides = [
-            {
-                title: "노인 운동 프로그램",
-                content: [
-                    "개인 맞춤형 운동 설계",
-                    "근력 강화 트레이닝",
-                    "유연성 및 균형 운동",
-                    "낙상 예방 프로그램",
-                    "인지 기능 향상 운동"
-                ]
-            },
-            {
-                title: "AI 기반 분석 시스템",
-                content: [
-                    "실시간 자세 분석",
-                    "운동 강도 자동 조절",
-                    "건강 데이터 통합 관리",
-                    "위험 요소 사전 감지",
-                    "맞춤형 피드백 제공"
-                ]
-            },
-            {
-                title: "근감소증 예방",
-                content: [
-                    "근력 측정 및 평가",
-                    "단백질 섭취 가이드",
-                    "저항 운동 프로그램",
-                    "영양 상태 모니터링",
-                    "정기적인 진행도 추적"
-                ]
-            },
-            {
-                title: "낙상 예방 훈련",
-                content: [
-                    "균형 감각 향상 운동",
-                    "하체 근력 강화",
-                    "보행 패턴 분석",
-                    "반응 속도 훈련",
-                    "환경 위험 요소 교육"
-                ]
-            },
-            {
-                title: "기대 효과",
-                content: [
-                    "건강수명 연장",
-                    "독립적인 생활 유지",
-                    "의료비 절감",
-                    "삶의 질 향상",
-                    "사회 활동 증진"
-                ]
-            }
+            'https://cdn.jsdelivr.net/gh/user/repo/slide1.jpg',
+            'https://cdn.jsdelivr.net/gh/user/repo/slide2.jpg',
+            'https://cdn.jsdelivr.net/gh/user/repo/slide3.jpg',
+            'https://cdn.jsdelivr.net/gh/user/repo/slide4.jpg',
+            'https://cdn.jsdelivr.net/gh/user/repo/slide5.jpg',
+            'https://cdn.jsdelivr.net/gh/user/repo/slide6.jpg',
+            'https://cdn.jsdelivr.net/gh/user/repo/slide7.jpg',
+            'https://cdn.jsdelivr.net/gh/user/repo/slide8.jpg',
+            'https://cdn.jsdelivr.net/gh/user/repo/slide9.jpg',
+            'https://cdn.jsdelivr.net/gh/user/repo/slide10.jpg',
+            'https://cdn.jsdelivr.net/gh/user/repo/slide11.jpg',
+            'https://cdn.jsdelivr.net/gh/user/repo/slide12.jpg',
+            'https://cdn.jsdelivr.net/gh/user/repo/slide13.jpg',
+            'https://cdn.jsdelivr.net/gh/user/repo/slide14.jpg'
         ];
 
         let currentSlideIndex = 0;
 
-        // 슬라이드 표시 함수
-        function showSlide(index) {
-            const slide = slides[index];
-            const slideElement = document.getElementById('pptSlide');
-            
-            let contentHTML = '<h2>' + slide.title + '</h2>';
-            contentHTML += '<ul class="ppt-content">';
-            
-            slide.content.forEach(item => {
-                contentHTML += '<li>' + item + '</li>';
+        // 슬라이드 닷 생성
+        function createDots() {
+            const dotsContainer = document.getElementById('slideDots');
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                if (index === 0) dot.classList.add('active');
+                dot.onclick = () => goToSlide(index);
+                dotsContainer.appendChild(dot);
             });
-            
-            contentHTML += '</ul>';
-            
-            slideElement.innerHTML = contentHTML;
+        }
+
+        // 슬라이드 표시
+        function showSlide(index) {
+            const slideElement = document.getElementById('pptSlide');
+            slideElement.style.backgroundImage = `url('${slides[index]}')`;
             document.getElementById('currentSlide').textContent = index + 1;
+            
+            // 닷 업데이트
+            document.querySelectorAll('.dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        // 특정 슬라이드로 이동
+        function goToSlide(index) {
+            currentSlideIndex = index;
+            showSlide(currentSlideIndex);
         }
 
         // 다음 슬라이드
@@ -342,8 +334,15 @@
             showSlide(currentSlideIndex);
         }
 
-        // 페이지 로드 시 첫 슬라이드 표시
+        // 키보드 화살표로 슬라이드 넘기기
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+        });
+
+        // 페이지 로드 시 초기화
         document.getElementById('totalSlides').textContent = slides.length;
+        createDots();
         showSlide(0);
     </script>
 </body>
