@@ -1,147 +1,193 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>스포츠의학과 | 노인 운동 AI PIP</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스포츠의학과 | 노인 운동 AI PIP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        body {
-            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-        }
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
 
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
 
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
 
-        header p {
-            font-size: 1.2em;
-            opacity: 0.95;
-        }
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto; /* 상하 마진 조정 */
+            padding: 40px 30px; /* 패딩 조정 */
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
 
-        .container h2 {
-            font-size: 2em;
-            margin-bottom: 30px;
-            color: #2c3e50;
-        }
+        .container h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+        
+        .container h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #34495e;
+            text-align: left;
+        }
 
-        .info-box {
-            background: #e7f3ff;
-            border-left: 5px solid #2196f3;
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 40px;
-            text-align: left;
-        }
+        .info-box {
+            background: #e7f3ff;
+            border-left: 5px solid #2196f3;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px; /* 간격 조정 */
+            text-align: left;
+        }
+        
+        .info-box ul {
+            list-style-position: inside;
+            padding-left: 10px;
+        }
+        
+        .info-box li {
+            margin-bottom: 10px;
+        }
 
-        #did-agent {
-            position: fixed !important;
-            bottom: 20px !important;
-            right: 20px !important;
-            z-index: 9999 !important;
-        }
+        /* --- ⬇️ 여기에 PPT 슬라이드 스타일 추가 ⬇️ --- */
+        #ppt-slides-container {
+            background-color: #fdfdfd; /* 약간 다른 배경색 */
+            border: 1px solid #eee;
+        }
 
-        footer {
-            background: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 60px;
-        }
+        .slide-image {
+            width: 100%;
+            max-width: 800px; /* PPT 슬라이드 최대 너비 */
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 25px; /* 슬라이드 간 간격 */
+        }
+        /* --- ⬆️ 여기까지 PPT 슬라이드 스타일 추가 ⬆️ --- */
 
-        footer p {
-            margin: 5px 0;
-        }
+        #did-agent {
+            position: fixed !important;
+            bottom: 20px !important;
+            right: 20px !important;
+            z-index: 9999 !important;
+        }
 
-        @media (max-width: 768px) {
-            header h1 { font-size: 1.8em; }
-            .container { padding: 30px 15px; }
-        }
-    </style>
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.8em; }
+            .container { padding: 30px 15px; margin: 20px auto; }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>🏋️‍♀️ 스포츠의학과 | 노인 운동 AI PIP</h1>
-        <p>건강수명 연장을 위한 AI 기반 개인 맞춤 운동 정보</p>
-    </header>
+    <header>
+        <h1>🏋️‍♀️ 스포츠의학과 | 노인 운동 AI PIP</h1>
+        <p>건강수명 연장을 위한 AI 기반 개인 맞춤 운동 정보</p>
+    </header>
 
-    <div class="container">
-        <h2>AI PIP (Personalized Intelligent Program)</h2>
-        <div class="info-box">
-            <p><strong>AI PIP</strong>은 인공지능을 활용해 노인의 신체 능력, 질병 이력, 생활 습관을 분석하여 
-            <strong>맞춤형 운동 프로그램</strong>을 제시하는 시스템입니다.</p><br>
+    <div class="container">
+        <h2>AI PIP (Personalized Intelligent Program)</h2>
+        <div class="info-box">
+            <p><strong>AI PIP</strong>은 인공지능을 활용해 노인의 신체 능력, 질병 이력, 생활 습관을 분석하여 
+            <strong>맞춤형 운동 프로그램</strong>을 제시하는 시스템입니다.</p><br>
+            <ul>
+                <li>🧠 근감소증·치매 예방 중심의 운동 처방</li>
+                <li>💪 AI가 분석하는 개인별 근력·균형 데이터</li>
+                <li>🏃‍♂️ 낙상 예방을 위한 균형훈련 시뮬레이션</li>
+                <li>📊 건강기록 연동을 통한 운동 효과 추적</li>
+                <li>🎯 스마트기기를 활용한 실시간 자세 피드백</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h3>📈 연구 및 활용 방향</h3>
+            <p>
+                본 AI PIP 시스템은 스포츠의학과의 운동생리학, 재활운동학, 헬스케어 AI 기술을 기반으로 하며, 
+                노인 맞춤 운동의 효과를 <strong>데이터 기반으로 평가</strong>하고 
+                <strong>AI 트레이닝 코치</strong>와 연동하여 실시간 운동 피드백을 제공합니다.
+            </p>
+        </div>
+        <div class="info-box">
+            <h3>🏥 기대 효과</h3>
+            <ul>
+                <li>✅ 낙상·근감소증 위험 감소</li>
+                <li>✅ 운동 지속률 및 자가관리 능력 향상</li>
+                <li>✅ AI 기반 재활·운동 처방 시스템 고도화</li>
+            </ul>
+        </div>
+    </div>
 
-            <ul>
-                <li>🧠 근감소증·치매 예방 중심의 운동 처방</li>
-                <li>💪 AI가 분석하는 개인별 근력·균형 데이터</li>
-                <li>🏃‍♂️ 낙상 예방을 위한 균형훈련 시뮬레이션</li>
-                <li>📊 건강기록 연동을 통한 운동 효과 추적</li>
-                <li>🎯 스마트기기를 활용한 실시간 자세 피드백</li>
-            </ul>
-        </div>
+       <div class="container" id="ppt-slides-container">
+        <h2>🏃‍♂️ 스텝 레더 운동 프로그램 (PPT)</h2>
+        <p style="margin-bottom: 30px;">아래는 '70대는 아직 젊다' 팀의 스텝 레더 운동 프로그램 자료입니다.<br>AI 에이전트에게 궁금한 것을 물어보세요!</p>
 
-        <div class="info-box">
-            <h3>📈 연구 및 활용 방향</h3>
-            <p>
-                본 AI PIP 시스템은 스포츠의학과의 운동생리학, 재활운동학, 헬스케어 AI 기술을 기반으로 하며, 
-                노인 맞춤 운동의 효과를 <strong>데이터 기반으로 평가</strong>하고 
-                <strong>AI 트레이닝 코치</strong>와 연동하여 실시간 운동 피드백을 제공합니다.
-            </p>
-        </div>
+               <img src="slide-1.png" alt="PPT Slide 1 - 70대는 아직 젊다" class="slide-image">
+        <img src="slide-2.png" alt="PPT Slide 2 - 목차" class="slide-image">
+        <img src="slide-3.png" alt="PPT Slide 3 - 프로그램 설계 원리" class="slide-image">
+        <img src="slide-4.png" alt="PPT Slide 4 - 스텝 레더 운동 소개" class="slide-image">
+        <img src="slide-5.png" alt="PPT Slide 5 - 스텝 레더 운동 유용성 1" class="slide-image">
+        <img src="slide-6.png" alt="PPT Slide 6 - 스텝 레더 운동 유용성 2" class="slide-image">
+        <img src="slide-7.png" alt="PPT Slide 7 - 절차기억이란" class="slide-image">
+        <img src="slide-8.png" alt="PPT Slide 8 - 절차기억의 일반화" class="slide-image">
+        <img src="slide-9.png" alt="PPT Slide 9 - 이중과제 운동의 원리" class="slide-image">
+        <img src="slide-10.png" alt="PPT Slide 10 - 인지기능 종류" class="slide-image">
+        <img src="slide-11.png" alt="PPT Slide 11 - 이중과제 적용" class="slide-image">
+        <img src="slide-12.png" alt="PPT Slide 12 - 공 던지고 잡기 운동" class="slide-image">
+        <img src="slide-13.png" alt="PPT Slide 13 - 통합 운동 프로그램" class="slide-image">
+        <img src="slide-14.png" alt="PPT Slide 14 - 감사합니다" class="slide-image">
+    </div>
+       <footer>
+        <p>© 2025 CHA University | 스포츠의학과</p>
+        <p>AI PIP for Senior Exercise Health</p>
+    </footer>
 
-        <div class="info-box">
-            <h3>🏥 기대 효과</h3>
-            <ul>
-                <li>✅ 낙상·근감소증 위험 감소</li>
-                <li>✅ 운동 지속률 및 자가관리 능력 향상</li>
-                <li>✅ AI 기반 재활·운동 처방 시스템 고도화</li>
-            </ul>
-        </div>
-    </div>
-
-    <footer>
-        <p>© 2025 CHA University | 스포츠의학과</p>
-        <p>AI PIP for Senior Exercise Health</p>
-    </footer>
-
-    <!-- D-ID AI Agent -->
-    <script type="module"
-          src="https://agent.d-id.com/v2/index.js"
-          data-mode="fabio"
-          data-client-key="Z29vZ2xlLW9hdXRoMnwxMTI3NjQ3MzA0NTM3NjA0MTgyMTI6d01EN0x6bFFFMmlZSk9nUHNacXll"
-          data-agent-id="v2_agt_UcvqQ_-y"
-          data-name="did-agent"
-          data-monitor="true"
-          data-orientation="horizontal"
-          data-position="right">
-    </script>
+       <script type="module"
+          src="https://agent.d-id.com/v2/index.js"
+          data-mode="fabio"
+          data-client-key="Z29vZ2xlLW9hdXRoMnwxMTI3NjQ3MzA0NTM3NjA0MTgyMTI6d01EN0x6bFFFMmlZSk9nUHNacXll"
+          data-agent-id="v2_agt_UcvqQ_-y"
+          data-name="did-agent"
+          data-monitor="true"
+          data-orientation="horizontal"
+          data-position="right">
+    </script>
 </body>
 </html>
