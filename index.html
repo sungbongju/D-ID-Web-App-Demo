@@ -1,147 +1,350 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>스포츠의학과 | 노인 운동 AI PIP</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스포츠의학과 | 노인 운동 AI PIP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        body {
-            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-        }
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
 
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
 
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
 
-        header p {
-            font-size: 1.2em;
-            opacity: 0.95;
-        }
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
 
-        .container h2 {
-            font-size: 2em;
-            margin-bottom: 30px;
-            color: #2c3e50;
-        }
+        .container h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
 
-        .info-box {
-            background: #e7f3ff;
-            border-left: 5px solid #2196f3;
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 40px;
-            text-align: left;
-        }
+        .info-box {
+            background: #e7f3ff;
+            border-left: 5px solid #2196f3;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
 
-        #did-agent {
-            position: fixed !important;
-            bottom: 20px !important;
-            right: 20px !important;
-            z-index: 9999 !important;
-        }
+        /* PPT 프레젠테이션 섹션 */
+        .presentation-section {
+            max-width: 1400px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
 
-        footer {
-            background: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 60px;
-        }
+        .presentation-container {
+            display: flex;
+            gap: 30px;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
 
-        footer p {
-            margin: 5px 0;
-        }
+        .ppt-slide {
+            flex: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 50px;
+            color: white;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-        @media (max-width: 768px) {
-            header h1 { font-size: 1.8em; }
-            .container { padding: 30px 15px; }
-        }
-    </style>
+        .ppt-slide h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .ppt-content {
+            font-size: 1.3em;
+            line-height: 2;
+        }
+
+        .ppt-content li {
+            margin-bottom: 20px;
+            list-style: none;
+        }
+
+        .ppt-content li:before {
+            content: "✓ ";
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .slide-controls {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .slide-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            margin: 0 10px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slide-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .slide-indicator {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        #did-agent {
+            position: fixed !important;
+            bottom: 20px !important;
+            right: 20px !important;
+            z-index: 9999 !important;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 1200px) {
+            .presentation-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.8em; }
+            .container { padding: 30px 15px; }
+            .ppt-slide { padding: 30px; min-height: 400px; }
+            .ppt-slide h2 { font-size: 1.8em; }
+            .ppt-content { font-size: 1.1em; }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>🏋️‍♀️ 스포츠의학과 | 노인 운동 AI PIP</h1>
-        <p>건강수명 연장을 위한 AI 기반 개인 맞춤 운동 정보</p>
-    </header>
+    <header>
+        <h1>🏋️‍♀️ 스포츠의학과 | 노인 운동 AI PIP</h1>
+        <p>건강수명 연장을 위한 AI 기반 개인 맞춤 운동 정보</p>
+    </header>
 
-    <div class="container">
-        <h2>AI PIP (Personalized Intelligent Program)</h2>
-        <div class="info-box">
-            <p><strong>AI PIP</strong>은 인공지능을 활용해 노인의 신체 능력, 질병 이력, 생활 습관을 분석하여 
-            <strong>맞춤형 운동 프로그램</strong>을 제시하는 시스템입니다.</p><br>
+    <div class="container">
+        <h2>AI PIP (Personalized Intelligent Program)</h2>
+        <div class="info-box">
+            <p><strong>AI PIP</strong>은 인공지능을 활용해 노인의 신체 능력, 질병 이력, 생활 습관을 분석하여 
+            <strong>맞춤형 운동 프로그램</strong>을 제시하는 시스템입니다.</p><br>
 
-            <ul>
-                <li>🧠 근감소증·치매 예방 중심의 운동 처방</li>
-                <li>💪 AI가 분석하는 개인별 근력·균형 데이터</li>
-                <li>🏃‍♂️ 낙상 예방을 위한 균형훈련 시뮬레이션</li>
-                <li>📊 건강기록 연동을 통한 운동 효과 추적</li>
-                <li>🎯 스마트기기를 활용한 실시간 자세 피드백</li>
-            </ul>
-        </div>
+            <ul>
+                <li>🧠 근감소증·치매 예방 중심의 운동 처방</li>
+                <li>💪 AI가 분석하는 개인별 근력·균형 데이터</li>
+                <li>🏃‍♂️ 낙상 예방을 위한 균형훈련 시뮬레이션</li>
+                <li>📊 건강기록 연동을 통한 운동 효과 추적</li>
+                <li>🎯 스마트기기를 활용한 실시간 자세 피드백</li>
+            </ul>
+        </div>
 
-        <div class="info-box">
-            <h3>📈 연구 및 활용 방향</h3>
-            <p>
-                본 AI PIP 시스템은 스포츠의학과의 운동생리학, 재활운동학, 헬스케어 AI 기술을 기반으로 하며, 
-                노인 맞춤 운동의 효과를 <strong>데이터 기반으로 평가</strong>하고 
-                <strong>AI 트레이닝 코치</strong>와 연동하여 실시간 운동 피드백을 제공합니다.
-            </p>
-        </div>
+        <div class="info-box">
+            <h3>📈 연구 및 활용 방향</h3>
+            <p>
+                본 AI PIP 시스템은 스포츠의학과의 운동생리학, 재활운동학, 헬스케어 AI 기술을 기반으로 하며, 
+                노인 맞춤 운동의 효과를 <strong>데이터 기반으로 평가</strong>하고 
+                <strong>AI 트레이닝 코치</strong>와 연동하여 실시간 운동 피드백을 제공합니다.
+            </p>
+        </div>
 
-        <div class="info-box">
-            <h3>🏥 기대 효과</h3>
-            <ul>
-                <li>✅ 낙상·근감소증 위험 감소</li>
-                <li>✅ 운동 지속률 및 자가관리 능력 향상</li>
-                <li>✅ AI 기반 재활·운동 처방 시스템 고도화</li>
-            </ul>
-        </div>
-    </div>
+        <div class="info-box">
+            <h3>🏥 기대 효과</h3>
+            <ul>
+                <li>✅ 낙상·근감소증 위험 감소</li>
+                <li>✅ 운동 지속률 및 자가관리 능력 향상</li>
+                <li>✅ AI 기반 재활·운동 처방 시스템 고도화</li>
+            </ul>
+        </div>
+    </div>
 
-    <footer>
-        <p>© 2025 CHA University | 스포츠의학과</p>
-        <p>AI PIP for Senior Exercise Health</p>
-    </footer>
+    <!-- PPT 프레젠테이션 섹션 -->
+    <div class="presentation-section">
+        <div class="presentation-container">
+            <div class="ppt-slide" id="pptSlide">
+                <!-- 슬라이드 내용이 여기 표시됩니다 -->
+            </div>
+        </div>
+        
+        <div class="slide-controls">
+            <button class="slide-btn" onclick="prevSlide()">◀ 이전</button>
+            <button class="slide-btn" onclick="nextSlide()">다음 ▶</button>
+            <div class="slide-indicator">
+                <span id="currentSlide">1</span> / <span id="totalSlides">5</span>
+            </div>
+        </div>
+    </div>
 
-    <!-- D-ID AI Agent -->
-    <script type="module"
-          src="https://agent.d-id.com/v2/index.js"
-          data-mode="fabio"
-          data-client-key="Z29vZ2xlLW9hdXRoMnwxMTI3NjQ3MzA0NTM3NjA0MTgyMTI6d01EN0x6bFFFMmlZSk9nUHNacXll"
-          data-agent-id="v2_agt_UcvqQ_-y"
-          data-name="did-agent"
-          data-monitor="true"
-          data-orientation="horizontal"
-          data-position="right">
-    </script>
+    <footer>
+        <p>© 2025 CHA University | 스포츠의학과</p>
+        <p>AI PIP for Senior Exercise Health</p>
+    </footer>
+
+    <!-- D-ID AI Agent -->
+    <script type="module"
+          src="https://agent.d-id.com/v2/index.js"
+          data-mode="fabio"
+          data-client-key="Z29vZ2xlLW9hdXRoMnwxMTI3NjQ3MzA0NTM3NjA0MTgyMTI6d01EN0x6bFFFMmlZSk9nUHNacXll"
+          data-agent-id="v2_agt_UcvqQ_-y"
+          data-name="did-agent"
+          data-monitor="true"
+          data-orientation="horizontal"
+          data-position="right">
+    </script>
+
+    <script>
+        // PPT 슬라이드 데이터
+        const slides = [
+            {
+                title: "노인 운동 프로그램",
+                content: [
+                    "개인 맞춤형 운동 설계",
+                    "근력 강화 트레이닝",
+                    "유연성 및 균형 운동",
+                    "낙상 예방 프로그램",
+                    "인지 기능 향상 운동"
+                ]
+            },
+            {
+                title: "AI 기반 분석 시스템",
+                content: [
+                    "실시간 자세 분석",
+                    "운동 강도 자동 조절",
+                    "건강 데이터 통합 관리",
+                    "위험 요소 사전 감지",
+                    "맞춤형 피드백 제공"
+                ]
+            },
+            {
+                title: "근감소증 예방",
+                content: [
+                    "근력 측정 및 평가",
+                    "단백질 섭취 가이드",
+                    "저항 운동 프로그램",
+                    "영양 상태 모니터링",
+                    "정기적인 진행도 추적"
+                ]
+            },
+            {
+                title: "낙상 예방 훈련",
+                content: [
+                    "균형 감각 향상 운동",
+                    "하체 근력 강화",
+                    "보행 패턴 분석",
+                    "반응 속도 훈련",
+                    "환경 위험 요소 교육"
+                ]
+            },
+            {
+                title: "기대 효과",
+                content: [
+                    "건강수명 연장",
+                    "독립적인 생활 유지",
+                    "의료비 절감",
+                    "삶의 질 향상",
+                    "사회 활동 증진"
+                ]
+            }
+        ];
+
+        let currentSlideIndex = 0;
+
+        // 슬라이드 표시 함수
+        function showSlide(index) {
+            const slide = slides[index];
+            const slideElement = document.getElementById('pptSlide');
+            
+            let contentHTML = '<h2>' + slide.title + '</h2>';
+            contentHTML += '<ul class="ppt-content">';
+            
+            slide.content.forEach(item => {
+                contentHTML += '<li>' + item + '</li>';
+            });
+            
+            contentHTML += '</ul>';
+            
+            slideElement.innerHTML = contentHTML;
+            document.getElementById('currentSlide').textContent = index + 1;
+        }
+
+        // 다음 슬라이드
+        function nextSlide() {
+            currentSlideIndex++;
+            if (currentSlideIndex >= slides.length) {
+                currentSlideIndex = 0;
+            }
+            showSlide(currentSlideIndex);
+        }
+
+        // 이전 슬라이드
+        function prevSlide() {
+            currentSlideIndex--;
+            if (currentSlideIndex < 0) {
+                currentSlideIndex = slides.length - 1;
+            }
+            showSlide(currentSlideIndex);
+        }
+
+        // 페이지 로드 시 첫 슬라이드 표시
+        document.getElementById('totalSlides').textContent = slides.length;
+        showSlide(0);
+    </script>
 </body>
 </html>
