@@ -221,9 +221,14 @@
 
         #aiVideo {
             width: 100%;
-            height: auto;
+            height: 300px;
             display: block;
             background: #000;
+        }
+
+        .agent-controls {
+            padding: 15px;
+            background: #f8f9fa;
         }
 
         .agent-status {
@@ -233,13 +238,47 @@
             color: #666;
         }
 
-        .status-online {
+        .status-speaking {
             color: #28a745;
             font-weight: 600;
         }
 
-        .status-offline {
+        .status-ready {
+            color: #007bff;
+            font-weight: 600;
+        }
+
+        .status-error {
             color: #dc3545;
+        }
+
+        .api-key-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .connect-button {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .connect-button:hover {
+            opacity: 0.9;
+        }
+
+        .connect-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         @media (max-width: 768px) {
@@ -383,10 +422,11 @@
                 </div>
             </div>
 
-            <!-- 나머지 탭들... (동일하게 유지) -->
+            <!-- Tab 4 - 스텝 레더 소개 -->
             <div id="tab4" class="tab-content">
                 <div class="slide">
                     <h2>스텝 레더 운동 소개</h2>
+                    
                     <div class="box">
                         <h3>스텝 레더의 정의 및 기본 원리</h3>
                         <ul>
@@ -395,21 +435,310 @@
                             <li>노인에게는 빠른 동작보다 <strong>체중 이동과 제어에 집중</strong></li>
                         </ul>
                     </div>
+
                     <div class="box">
                         <h3>체중이동 운동의 필요성</h3>
                         <ul>
                             <li>저·중 강도의 <strong>단일 저항운동</strong> 및 <strong>걷기</strong>는 낙상 예방 효과가 불확실함</li>
                             <li>체중 부하, 체중이동, 발 디딤 훈련이 필요</li>
                             <li>연구 결과 <strong>낙상률 23% 감소</strong>, <strong>낙상 경험률 15% 감소</strong></li>
+                            <li>다양한 방향으로 훈련하여 실제 낙상 위험 예방</li>
+                            <li>이중과제를 제시하여 인지 기능 증진 효과</li>
+                        </ul>
+                    </div>
+
+                    <p style="font-size: 0.9em; color: #6c757d; margin-top: 20px;">
+                        출처: Effect of physical activity on cognitive function in older adults at risk for Alzheimer disease (2008). JAMA
+                    </p>
+                </div>
+            </div>
+
+            <!-- Tab 5 - 유용성 1 -->
+            <div id="tab5" class="tab-content">
+                <div class="slide">
+                    <h2>스텝 레더 운동의 유용성 (1)</h2>
+                    
+                    <div class="highlight">
+                        <h3>"시각적 반응속도와 균형 조절은 시각-운동 학습의 대표 지표"</h3>
+                    </div>
+
+                    <div class="box">
+                        <h3>연구 결과</h3>
+                        <p><strong>1. 선택적 반응시간 감소 (F=18.203, p<0.001)</strong></p>
+                        <p><strong>2. 균형·감각 종합지수개선 (p=0.001)</strong></p>
+                        <br>
+                        <p>시각-운동 학습에서 스텝 훈련이 유의하다는 결과</p>
+                    </div>
+
+                    <div class="card">
+                        <p>반복적인 스텝 훈련은 시각 자극에 대한 즉각적인 운동 반응을 향상시켜 낙상 위험을 낮춤.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 6 - 유용성 2 -->
+            <div id="tab6" class="tab-content">
+                <div class="slide">
+                    <h2>스텝 레더 운동의 유용성 (2)</h2>
+                    
+                    <div class="box">
+                        <h3>방향 전환 및 전이 능력</h3>
+                        <ul>
+                            <li>한 가지 스텝 훈련이 다른 방향 전환에 운동학습 일반화</li>
+                            <li>다양한 훈련으로 복잡한 상황에서 신체 조절 능력 향상</li>
+                            <li>일상생활의 다양한 움직임에 적응력 증가</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
+            <!-- Tab 7 - 절차기억 -->
+            <div id="tab7" class="tab-content">
+                <div class="slide">
+                    <h2>반복숙달을 통한 절차기억의 이해: 절차기억이란</h2>
+                    
+                    <div class="grid">
+                        <div class="card">
+                            <h4>1. 절차기억</h4>
+                            <p>운동 기술 혹은 인지 기술 등 무언가를 하는 방법에 대한 무의식적 신체의 기억으로 반복적인 연습을 통해 습득되고 한 번 형성되면 의식적인 노력 없이도 자동적으로 수행됨</p>
+                        </div>
+                        
+                        <div class="card">
+                            <h4>2. 절차기억의 순서</h4>
+                            <ul>
+                                <li>이론적 습득, 인지적 주의 필요</li>
+                                <li>피드백과 반복, 수행력 증가</li>
+                                <li>기술이 완전히 숙달되어 자동으로 수행되는 최종 단계</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="card">
+                            <h4>3. 뇌 영역</h4>
+                            <ul>
+                                <li><strong>기저핵:</strong> 절차기억의 핵심 영역</li>
+                                <li><strong>소뇌:</strong> 모든 동작의 미세한 운동 조절</li>
+                                <li><strong>전전두엽:</strong> 새로운 정보에 대해 '어떻게 할지' 계획 및 사고 담당</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 8 - 절차기억 일반화 -->
+            <div id="tab8" class="tab-content">
+                <div class="slide">
+                    <h2>반복숙달을 통한 절차기억의 이해: 절차기억의 일반화</h2>
+                    
+                    <div class="grid">
+                        <div class="card">
+                            <h4>"절차기억의 특성"</h4>
+                            <p><strong>1. 특이성</strong></p>
+                            <p>숙련기억은 일반적으로 일반화 되지 않음.</p>
+                            <br>
+                            <p><strong>2. 유연성</strong></p>
+                            <p>새로운 상황에 직면 시 과거의 경험을 이용. 일반화를 시도.</p>
+                        </div>
+                        
+                        <div class="card">
+                            <h4>"절차기억의 일반화"</h4>
+                            <p><strong>1. 전이 가능성</strong></p>
+                            <p>학습된 상황과 유사한 상황 발생 시 효과적인 대안책이 됨.</p>
+                        </div>
+                        
+                        <div class="card">
+                            <h4>"스텝레더의 일반화"</h4>
+                            <p>스텝레더 훈련은 낙상 상황에 대한 유용한 시각-운동 일반화를 제공</p>
+                            <ul>
+                                <li>발 디딤의 역제 및 조절</li>
+                                <li>관절 수용기의 조절</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 9 - 이중과제 원리 -->
+            <div id="tab9" class="tab-content">
+                <div class="slide">
+                    <h2>이중과제 운동의 원리</h2>
+                    
+                    <div class="card">
+                        <h4>1. 이중과제 운동의 정의</h4>
+                        <ul>
+                            <li>두 가지 독립적인 과제를 동시에 수행하는 훈련 전략</li>
+                            <li>신체적 과제와 인지적 과제의 결합 또는 두 개의 신체적 과제 동시 수행</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h4>2. 이중과제 운동의 원리</h4>
+                        <ul>
+                            <li>일상생활에서 두 가지 이상의 일을 동시에 처리하는 능력 향상</li>
+                            <li>한 과제 집중 시 다른 과제 수행 능력 저하 현상 감소</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h4>3. 이중과제 운동의 원칙</h4>
+                        <ul>
+                            <li>일상생활과 유사한 과제를 제시</li>
+                            <li>두 가지 과제의 유사한 간섭을 최소화</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 10 - 인지기능 종류 -->
+            <div id="tab10" class="tab-content">
+                <div class="slide">
+                    <h2>인지기능 종류</h2>
+                    
+                    <div class="grid">
+                        <div class="card">
+                            <h4>기억 및 학습</h4>
+                            <p>정보를 저장하고 필요할 때 인출하여 사용하는 능력.(숫자, 사건, 지식 등)</p>
+                        </div>
+                        
+                        <div class="card">
+                            <h4>주의 및 집중</h4>
+                            <p>특정 자극에 초점을 맞추고, 불필요한 자극을 무시하며 집중을 유지하는 능력.</p>
+                        </div>
+                        
+                        <div class="card">
+                            <h4>언어 능력</h4>
+                            <p>듣기, 말하기, 읽기, 쓰기 등의 사소통을 위해 언어를 사용하고 이해하는 능력.</p>
+                        </div>
+                        
+                        <div class="card">
+                            <h4>지각 운동 및 공간 처리</h4>
+                            <p>눈으로 본 정보(지각)를 바탕으로 신체를 움직이고, 공간 관계를 파악하는 능력.</p>
+                        </div>
+                        
+                        <div class="card">
+                            <h4>집행 기능</h4>
+                            <p>목표 설정, 계획 수립, 문제 해결, 행동 조절 등 복잡한 인지 활동을 이괄 지휘하는 능력.</p>
+                        </div>
+                        
+                        <div class="card">
+                            <h4>처리 속도 및 정보 처리</h4>
+                            <p>정보를 빠르고 정확하게 받아들이고 처리하여 반응을 출력하는 속도.</p>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 20px;">
+                        <h4>사회인지</h4>
+                        <p>사람들이 자신과 타인, 그리고 사회적 상황에 대한 정보를 처리하고 이해하는 능력</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 11 - 이중과제 적용 -->
+            <div id="tab11" class="tab-content">
+                <div class="slide">
+                    <h2>스텝레더의 이중과제 적용</h2>
+                    
+                    <div class="grid">
+                        <div class="card">
+                            <h4>1. 기존 스텝 레더 훈련</h4>
+                            <p>시각적 단서를 활용하여 보행 안정성, 하지 협응력, 반응속도 향상에 효과적</p>
+                            <p><strong>하지만</strong></p>
+                            <p>주로 시각 + 운동 자극 중심 → 감각 자극의 단일화 한계</p>
+                        </div>
+                        
+                        <div class="card">
+                            <h4>2. 청각 기반 이중과제 설계</h4>
+                            <p><strong>a. 청각 자극 종류에 따라 특정 동작을 기억시킴</strong></p>
+                            <p><strong>b. 스텝 레더 수행 중 무작위 호각 제시 → 즉각적 반응 요구</strong></p>
+                            <p>기존 시각에만 의존하던 운동에 청각·기억·주의 전환을 추가한 복합 훈련</p>
+                        </div>
+                    </div>
+
+                    <div class="box" style="margin-top: 20px;">
+                        <h4>예시</h4>
+                        <p><strong>호각 소리 1회:</strong> 박수 한 번</p>
+                        <p><strong>호각 소리 2회:</strong> 가볍게 만세</p>
+                        <p><strong>호각 소리 드레이:</strong> 무릎 터치</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 12 - 공 던지고 잡기 -->
+            <div id="tab12" class="tab-content">
+                <div class="slide">
+                    <h2>공 던지고 잡기 운동</h2>
+                    
+                    <div class="card">
+                        <h4>운동 선정 이유</h4>
+                        <p>공을 던지고 받는 동작으로 <strong>상지의 협응력</strong>, <strong>반응속도</strong>, <strong>눈-손 협응</strong>을 향상시키며, 스텝 레더의 하지 집중 운동을 상지로 전이하여 <strong>하지와 상지의 통합성을 유도</strong></p>
+                    </div>
+
+                    <div class="card">
+                        <h4>일상생활 적용</h4>
+                        <p>공의 궤적을 예측하고 잡는 <strong>판단력</strong>을 증진시켜서 노인의 움직임을 증진시키며,</p>
+                        <p><strong>낙상 시 난간을 잡는 등</strong> 일상생활 동작에서 수행 능력 향상에 기여할 수 있음 것이다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 13 - 통합 프로그램 -->
+            <div id="tab13" class="tab-content">
+                <div class="slide">
+                    <h2>통합 운동 프로그램</h2>
+                    
+                    <div class="grid">
+                        <div class="card">
+                            <h4>리듬과 함께 스텝 운동</h4>
+                            <ol>
+                                <li>완두로 달걀 스텝</li>
+                                <li>음유으로 병아리 스텝</li>
+                                <li>삼차게 꼬꼬닭 스텝</li>
+                                <li>복잡하게 치킨 스텝</li>
+                                <li>각 스텝 후 공 던지고 받기</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="card">
+                            <h4>메디신 볼 던지고 받기</h4>
+                            <ol>
+                                <li>하나의 스텝 홉 들이서 하이파이브</li>
+                                <li>들이서 마주 보고 공 던지고 받기</li>
+                                <li>왕복 3회 후 다음 스텝으로</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="card">
+                            <h4>이중과제 스텝레더</h4>
+                            <ol>
+                                <li>스텝 도중 무작위 이중과제 수행</li>
+                                <li>스텝 종료 후 검사 휴식</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="box" style="margin-top: 30px;">
+                        <h3>"통합프로그램을 그룹운동으로 적용"</h3>
+                        <br>
+                        <h4>운동의 즐거움 상승</h4>
+                        <h4>사회적 교류 증진</h4>
+                        <h4>정서적 안정감 형성</h4>
+                        <h4>상호 피드백과 모방</h4>
+                        <br>
+                        <p><strong>"사회인지기능 향상"</strong></p>
+                        <p><strong>"자기효능감 상승"</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 14 - 감사합니다 -->
             <div id="tab14" class="tab-content">
                 <div class="slide cover">
                     <h1>감사합니다</h1>
                     <h2>- 꼼빛 차티시엘 -</h2>
+                    <br><br>
+                    <p>조장: 20237515 최재원</p>
+                    <p>조원: 20237488 이승준</p>
+                    <p>조원: 20237521 안도현</p>
+                    <p>조원: 20237528 이요한</p>
                 </div>
             </div>
         </div>
@@ -418,11 +747,18 @@
     <!-- AI Agent Container -->
     <div class="ai-agent-container">
         <div class="ai-agent-header">
-            AI 설명 아바타
+            🤖 AI 설명 아바타
         </div>
-        <video id="aiVideo" autoplay playsinline></video>
+        <video id="aiVideo" autoplay playsinline loop muted></video>
+        <div class="agent-controls">
+            <input type="text" 
+                   id="apiKeyInput" 
+                   class="api-key-input" 
+                   placeholder="D-ID API Key를 입력하세요 (선택사항)">
+            <button id="connectButton" class="connect-button">AI 활성화</button>
+        </div>
         <div class="agent-status">
-            <span id="agentStatus">연결 중...</span>
+            <span id="agentStatus">⚪ 대기 중 - API 키 입력 후 활성화 버튼을 눌러주세요</span>
         </div>
     </div>
 
@@ -431,15 +767,30 @@
         const tabData = [
             { id: 'tab1', label: '표지', message: '안녕하세요. 70대는 아직 젊다 프로그램에 오신 것을 환영합니다.' },
             { id: 'tab2', label: '목차', message: '목차를 보여드리겠습니다. 이 프로그램은 프로그램 설계 원리, 스텝 레더 운동 소개, 절차기억의 이해, 이중과제 운동, 그리고 통합 프로그램으로 구성되어 있습니다.' },
-            { id: 'tab3', label: '프로그램 설계', message: '프로그램 설계 원리를 설명드립니다. 우리는 노인을 절대 과소평가하지 않습니다.' },
-            { id: 'tab4', label: '스텝 레더 소개', message: '스텝 레더 운동을 소개합니다. 낙상률 23퍼센트 감소 효과가 있습니다.' },
+            { id: 'tab3', label: '프로그램 설계', message: '프로그램 설계 원리를 설명드립니다. 우리는 노인을 절대 과소평가하지 않습니다. 신체는 시스템이며, 반복을 통한 장기 기억을 형성하고, 인지 기능 향상을 목표로 합니다.' },
+            { id: 'tab4', label: '스텝 레더 소개', message: '스텝 레더 운동을 소개합니다. 바닥에 놓인 사다리 모양의 도구로 체중이동과 균형감각을 향상시킵니다. 낙상률 23퍼센트 감소, 낙상 경험률 15퍼센트 감소라는 연구 결과가 있습니다.' },
+            { id: 'tab5', label: '유용성 1', message: '스텝 레더 운동의 첫 번째 유용성입니다. 시각적 반응속도와 균형 조절 능력이 크게 향상되며, 반복적인 스텝 훈련은 시각 자극에 대한 즉각적인 운동 반응을 향상시켜 낙상 위험을 낮춥니다.' },
+            { id: 'tab6', label: '유용성 2', message: '스텝 레더 운동의 두 번째 유용성입니다. 한 가지 스텝 훈련이 다른 방향 전환에도 운동학습이 일반화되며, 복잡한 상황에서 신체 조절 능력이 향상됩니다.' },
+            { id: 'tab7', label: '절차기억이란', message: '절차기억을 설명합니다. 운동 기술에 대한 무의식적 신체 기억으로, 반복 연습을 통해 습득되며 한 번 형성되면 자동적으로 수행됩니다. 기저핵, 소뇌, 전전두엽이 관여합니다.' },
+            { id: 'tab8', label: '절차기억 일반화', message: '절차기억의 일반화를 설명합니다. 학습된 상황과 유사한 상황에서 효과적으로 적용될 수 있으며, 스텝레더 훈련은 낙상 상황에 대한 유용한 시각-운동 일반화를 제공합니다.' },
+            { id: 'tab9', label: '이중과제 원리', message: '이중과제 운동의 원리입니다. 두 가지 독립적인 과제를 동시에 수행하여 일상생활에서 여러 일을 동시에 처리하는 능력을 향상시킵니다.' },
+            { id: 'tab10', label: '인지기능 종류', message: '인지기능의 종류를 설명합니다. 기억 및 학습, 주의 및 집중, 언어 능력, 지각 운동, 집행 기능, 처리 속도, 그리고 사회인지로 구성됩니다.' },
+            { id: 'tab11', label: '이중과제 적용', message: '스텝레더에 이중과제를 적용합니다. 청각 자극을 추가하여 시각과 운동뿐만 아니라 기억과 주의 전환 능력도 향상시킵니다. 호각 소리에 따라 박수, 만세, 무릎 터치 등의 동작을 수행합니다.' },
+            { id: 'tab12', label: '공 던지고 잡기', message: '공 던지고 잡기 운동입니다. 상지의 협응력과 반응속도, 눈-손 협응을 향상시키며, 낙상 시 난간을 잡는 등 실생활에 적용됩니다.' },
+            { id: 'tab13', label: '통합 프로그램', message: '통합 운동 프로그램입니다. 리듬 스텝, 메디신 볼, 이중과제를 그룹 운동으로 진행하여 운동의 즐거움, 사회적 교류, 정서적 안정감을 높이고 사회인지 기능과 자기효능감을 향상시킵니다.' },
             { id: 'tab14', label: '감사합니다', message: '발표를 마치겠습니다. 경청해 주셔서 감사합니다.' }
         ];
 
         // 전역 변수
-        let agentInstance = null;
+        let apiKey = '';
+        let isConnected = false;
         const videoElement = document.getElementById('aiVideo');
         const statusElement = document.getElementById('agentStatus');
+        const apiKeyInput = document.getElementById('apiKeyInput');
+        const connectButton = document.getElementById('connectButton');
+
+        // 기본 아이들 비디오 설정
+        videoElement.src = 'data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMQAAAAhmcmVlAAAA';
 
         // 탭 버튼 생성
         const tabButtonsContainer = document.getElementById('tabButtons');
@@ -466,83 +817,124 @@
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
 
-            // AI에게 메시지 전송
-            if (agentInstance && message) {
-                try {
-                    agentInstance.chat({ messages: [message] });
-                } catch (error) {
-                    console.error('Chat error:', error);
-                }
+            // AI가 연결되어 있으면 메시지 전송
+            if (isConnected && message) {
+                speakMessage(message);
             }
         }
 
-        // D-ID Agent 초기화 (CDN 방식)
-        async function initAgent() {
+        // D-ID API를 사용하여 음성 생성
+        async function speakMessage(text) {
+            if (!apiKey) {
+                statusElement.textContent = '⚠️ API 키를 먼저 입력해주세요';
+                statusElement.className = 'status-error';
+                return;
+            }
+
             try {
-                statusElement.textContent = '초기화 중...';
-                
-                // D-ID Agents SDK가 로드될 때까지 대기
-                if (typeof window.agents === 'undefined') {
-                    await new Promise((resolve) => {
-                        const checkInterval = setInterval(() => {
-                            if (typeof window.agents !== 'undefined') {
-                                clearInterval(checkInterval);
-                                resolve();
+                statusElement.textContent = '🎤 말하는 중...';
+                statusElement.className = 'status-speaking';
+
+                const response = await fetch('https://api.d-id.com/talks', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Basic ${apiKey}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        script: {
+                            type: 'text',
+                            input: text,
+                            provider: {
+                                type: 'microsoft',
+                                voice_id: 'ko-KR-SunHiNeural'
                             }
-                        }, 100);
-                    });
+                        },
+                        config: {
+                            fluent: true,
+                            pad_audio: 0
+                        },
+                        source_url: 'https://create-images-results.d-id.com/DefaultPresenters/Noelle_f/image.jpeg'
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.id) {
+                    // 비디오 생성 완료 대기
+                    await pollForVideo(data.id);
+                } else {
+                    throw new Error('비디오 생성 실패');
                 }
-
-                const agent = window.agents.createAgent({
-                    agentId: 'v2_agt_UcvqQ_-y',
-                    auth: {
-                        type: 'key',
-                        clientKey: 'Z29vZ2xlLW9hdXRoMnwxMTI3NjQ3MzA0NTM3NjA0MTgyMTI6d01EN0x6bFFFMmlZSk9nUHNacXll'
-                    }
-                });
-
-                agent.on('stream_ready', (stream) => {
-                    videoElement.srcObject = stream;
-                    statusElement.textContent = '온라인';
-                    statusElement.className = 'status-online';
-                });
-
-                agent.on('disconnected', () => {
-                    statusElement.textContent = '연결 끊김';
-                    statusElement.className = 'status-offline';
-                });
-
-                agent.on('error', (error) => {
-                    console.error('Agent error:', error);
-                    statusElement.textContent = '오류 발생';
-                    statusElement.className = 'status-offline';
-                });
-
-                await agent.connect();
-                agentInstance = agent;
 
             } catch (error) {
-                console.error('Agent initialization error:', error);
-                statusElement.textContent = '초기화 실패 - API 키를 확인해주세요';
-                statusElement.className = 'status-offline';
+                console.error('Speech error:', error);
+                statusElement.textContent = '❌ 음성 생성 실패';
+                statusElement.className = 'status-error';
             }
         }
 
-        // D-ID SDK 스크립트 로드
-        const script = document.createElement('script');
-        script.src = 'https://cdn.d-id.com/agents/index.js';
-        script.type = 'module';
-        script.onload = () => {
-            console.log('D-ID SDK loaded');
-            // SDK 로드 후 약간의 지연을 두고 초기화
-            setTimeout(initAgent, 500);
-        };
-        script.onerror = () => {
-            console.error('Failed to load D-ID SDK');
-            statusElement.textContent = 'SDK 로드 실패';
-            statusElement.className = 'status-offline';
-        };
-        document.head.appendChild(script);
+        // 비디오 생성 상태 확인
+        async function pollForVideo(talkId) {
+            const maxAttempts = 30;
+            let attempts = 0;
+
+            const checkStatus = async () => {
+                try {
+                    const response = await fetch(`https://api.d-id.com/talks/${talkId}`, {
+                        headers: {
+                            'Authorization': `Basic ${apiKey}`
+                        }
+                    });
+
+                    const data = await response.json();
+
+                    if (data.status === 'done' && data.result_url) {
+                        videoElement.src = data.result_url;
+                        videoElement.muted = false;
+                        videoElement.play();
+                        statusElement.textContent = '✅ 재생 중';
+                        statusElement.className = 'status-speaking';
+                        
+                        videoElement.onended = () => {
+                            statusElement.textContent = '🟢 준비됨';
+                            statusElement.className = 'status-ready';
+                        };
+                    } else if (data.status === 'error') {
+                        throw new Error('비디오 생성 오류');
+                    } else if (attempts < maxAttempts) {
+                        attempts++;
+                        setTimeout(checkStatus, 1000);
+                    } else {
+                        throw new Error('타임아웃');
+                    }
+                } catch (error) {
+                    console.error('Polling error:', error);
+                    statusElement.textContent = '❌ 비디오 로드 실패';
+                    statusElement.className = 'status-error';
+                }
+            };
+
+            checkStatus();
+        }
+
+        // 연결 버튼 이벤트
+        connectButton.addEventListener('click', () => {
+            const inputKey = apiKeyInput.value.trim();
+            
+            if (!inputKey) {
+                alert('D-ID API 키를 입력해주세요.\n\n키가 없다면 https://studio.d-id.com 에서 발급받을 수 있습니다.');
+                return;
+            }
+
+            apiKey = inputKey;
+            isConnected = true;
+            connectButton.textContent = '✅ 연결됨';
+            connectButton.disabled = true;
+            apiKeyInput.disabled = true;
+            statusElement.textContent = '🟢 준비됨 - 탭을 클릭하여 설명을 들어보세요';
+            statusElement.className = 'status-ready';
+        });
     </script>
 </body>
 </html>
